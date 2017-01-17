@@ -147,16 +147,38 @@ void push_pair(baby_vm *vm)
   push(vm, object);
 }
 
-void free_vm(baby_vm* vm) 
+void free_vm(baby_vm* vm)
 {
   vm->stack_size = 0;
   gc(vm);
   free(vm);
 }
 
+void print_object(baby_object* object)
+{
+  if (object->type == OBJ_INT)
+  {
+    printf("%d ", object->value);
+  }
+  else
+  {
+    print_object(object->head);
+    print_object(object->tail);
+  }
+}
+
+void print_stack(baby_vm *vm)
+{
+  for (int i = 0; i < vm->num_objects; i++)
+  {
+    print_object(vm->stack[i]);
+  }
+  printf("\n");
+}
+
 int main()
 {
-  baby_vm* vm = new_vm();
+  baby_vm *vm = new_vm();
 
   push_int(vm, 1);
   push_int(vm, 2);
@@ -168,11 +190,15 @@ int main()
   push_int(vm, 8);
 
   printf("Number of objects before %d\n", vm->num_objects);
-  
+
+  print_stack(vm);
+
   pop(vm);
   pop(vm);
 
   gc(vm);
+
+  print_stack(vm);
 
   printf("Resulting number of objects %d\n", vm->num_objects);
 
