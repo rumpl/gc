@@ -140,7 +140,7 @@ void push_int(baby_vm *vm, int value)
 
 void push_pair(baby_vm *vm)
 {
-  baby_object *object = new_object(vm, OBJ_INT);
+  baby_object *object = new_object(vm, OBJ_PAIR);
   object->tail = pop(vm);
   object->head = pop(vm);
 
@@ -158,20 +158,24 @@ void print_object(baby_object* object)
 {
   if (object->type == OBJ_INT)
   {
-    printf("%d ", object->value);
+    printf("%d", object->value);
   }
   else
   {
+    printf("(");
     print_object(object->head);
+    printf(" ");
     print_object(object->tail);
+    printf(")");
   }
 }
 
 void print_stack(baby_vm *vm)
 {
-  for (int i = 0; i < vm->num_objects; i++)
+  for (int i = 0; i < vm->stack_size; i++)
   {
     print_object(vm->stack[i]);
+    printf(" ");
   }
   printf("\n");
 }
@@ -186,6 +190,7 @@ int main()
   push_int(vm, 4);
   push_int(vm, 5);
   push_int(vm, 6);
+  push_pair(vm);
   push_int(vm, 7);
   push_int(vm, 8);
 
