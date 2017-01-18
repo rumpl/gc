@@ -1,12 +1,13 @@
 BIN=gc
 
-.PHONY : clean 
+SRC=$(wildcard *.c)
 
-$(BIN) : main.c
-	$(CC)  -ggdb -std=gnu99  main.c -o $(BIN)
+CFLAGS = -Wall
 
-clean :
+.PHONY: clean
+
+$(BIN): clean $(SRC)
+	$(CC) -std=gnu99 $(SRC) $(CFLAGS) -o $(BIN)
+
+clean:
 	rm -f $(BIN) *~
-
-run : $(BIN)
-	valgrind  --leak-check=yes ./$(BIN)
