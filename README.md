@@ -2,7 +2,7 @@
 
 An implementation of the [Baby's first garbage colector](http://journal.stuffwithstuff.com/2013/12/08/babys-first-garbage-collector/).
 
-This is a simple mark and sweep garbage colector. Making it just for the fun of it.
+This is a simple mark and sweep garbage colector. Making it just for the fun of it. And boy was it fun!
 
 ## LICENSE
 
