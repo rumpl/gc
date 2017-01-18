@@ -16,7 +16,7 @@ int main()
   push_int(vm, 6);
   push_pair(vm);
   push_int(vm, 7);
-  push_int(vm, 8);
+  push_pair(vm);
 
   printf("Number of objects before %d\n", vm->num_objects);
 
