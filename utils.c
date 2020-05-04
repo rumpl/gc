@@ -1,15 +1,11 @@
-#include <stdio.h>
-
 #include "utils.h"
 
-void print_object(baby_object *object)
-{
-  if (object->type == OBJ_INT)
-  {
+#include <stdio.h>
+
+void print_object(baby_object *object) {
+  if (object->type == OBJ_INT) {
     printf("%d", object->value);
-  }
-  else
-  {
+  } else {
     printf("(");
     print_object(object->head);
     printf(" ");
@@ -18,10 +14,8 @@ void print_object(baby_object *object)
   }
 }
 
-void print_stack(baby_vm *vm)
-{
-  for (int i = 0; i < vm->stack_size; i++)
-  {
+void print_stack(baby_vm *vm) {
+  for (int i = 0; i < vm->stack_size; i++) {
     print_object(vm->stack[i]);
     printf(" ");
   }

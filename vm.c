@@ -1,10 +1,10 @@
+#include "vm.h"
+
 #include <stdlib.h>
 
-#include "vm.h"
 #include "gc_mark_sweep.h"
 
-baby_vm *new_vm()
-{
+baby_vm *new_vm() {
   baby_vm *vm = malloc(sizeof(baby_vm));
   vm->stack_size = 0;
   vm->num_objects = 0;
@@ -12,20 +12,14 @@ baby_vm *new_vm()
   return vm;
 }
 
-void push(baby_vm *vm, baby_object *object)
-{
+void push(baby_vm *vm, baby_object *object) {
   vm->stack[vm->stack_size++] = object;
 }
 
-baby_object *pop(baby_vm *vm)
-{
-  return vm->stack[--vm->stack_size];
-}
+baby_object *pop(baby_vm *vm) { return vm->stack[--vm->stack_size]; }
 
-baby_object *new_object(baby_vm *vm, baby_object_type type)
-{
-  if (vm->num_objects > vm->max_objects)
-  {
+baby_object *new_object(baby_vm *vm, baby_object_type type) {
+  if (vm->num_objects > vm->max_objects) {
     gc(vm);
   }
 
@@ -40,15 +34,13 @@ baby_object *new_object(baby_vm *vm, baby_object_type type)
   return object;
 }
 
-void push_int(baby_vm *vm, int value)
-{
+void push_int(baby_vm *vm, int value) {
   baby_object *object = new_object(vm, OBJ_INT);
   object->value = value;
   push(vm, object);
 }
 
-void push_pair(baby_vm *vm)
-{
+void push_pair(baby_vm *vm) {
   baby_object *object = new_object(vm, OBJ_PAIR);
   object->tail = pop(vm);
   object->head = pop(vm);
@@ -56,8 +48,7 @@ void push_pair(baby_vm *vm)
   push(vm, object);
 }
 
-void free_vm(baby_vm *vm)
-{
+void free_vm(baby_vm *vm) {
   vm->stack_size = 0;
   gc(vm);
   free(vm);

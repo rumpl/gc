@@ -1,11 +1,10 @@
 #include <stdio.h>
 
-#include "vm.h"
 #include "gc_mark_sweep.h"
 #include "utils.h"
+#include "vm.h"
 
-int main()
-{
+int main() {
   baby_vm *vm = new_vm();
 
   push_int(vm, 1);

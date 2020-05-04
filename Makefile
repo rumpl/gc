@@ -2,12 +2,12 @@ BIN=gc
 
 SRC=$(wildcard *.c)
 
-CFLAGS = -Wall
+CFLAGS = -Wall -pedantic -pedantic-errors
 
 .PHONY: clean
 
 $(BIN): clean $(SRC)
-	$(CC) -std=gnu99 $(SRC) $(CFLAGS) -o $(BIN)
+	$(CC) -std=c11 $(SRC) $(CFLAGS) -o $(BIN)
 
 clean:
 	rm -f $(BIN) *~
