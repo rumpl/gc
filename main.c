@@ -7,6 +7,7 @@
 int main() {
   baby_vm *vm = new_vm();
 
+
   push_int(vm, 1);
   push_int(vm, 2);
   push_int(vm, 3);
